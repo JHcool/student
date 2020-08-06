@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{title}}</title>
+{% endblock %}
+
+{% block content %}
+{% if id != None %}
+<!-- 
+    從index頁面進入 or 有輸入id且存在者
+ -->
+<h2>{{h2_value}}</h2>
+<form action="." method="POST" name=form1>
+    {% csrf_token %}
+    <table border="1" cellspacing='1' cellpadding='4'>
+        <tr>
+            <th>姓名 : </th>
+            <td><input type="text" id='cName' name='cName' value={{unit.cName}}></td>
+        </tr>
+        <tr>
+            <th>性別 : </th>
+            {% if unit.cSex == 'M' %}
+            <td>
+                <input type="radio" name="cSex" id="cSex1" value="M" checked='checked'>男性
+                <input type="radio" name="cSex" id="cSex2" value="F">女性
+            </td>
+            {% else %}
+            <td>
+                <input type="radio" name="cSex" id="cSex1" value="M">男性
+                <input type="radio" name="cSex" id="cSex2" value="F" checked='checked'>女性
+            </td>
+            {% endif %}
+        </tr>
+        <tr>
+            <th>生日 : </th>
+            <td><input type="text" name="cBirthday" id="cBirthday" value={{unit.cBirthday}}></td>
+        </tr>
+        <tr>
+            <th>Email : </th>
+            <td><input type="text" name="cEmail" id="cEmail" value={{unit.cEmail}}></td>
+        </tr>
+        <tr>
+            <th>電話 : </th>
+            <td><input type="text" name="cPhone" id="cPhone" value={{unit.cPhone}}></td>
+        </tr>
+        <tr>
+            <th>地址 : </th>
+            <td><input type="text" name="cAddr" id="cAddr" value={{unit.cAddr}}></td>
+        </tr>
+        <tr>
+            <th colspan='3' align='center'>
+                <input type="submit" name="button1" id="button1" value="送出">&nbsp;
+                <input type="reset" name="button2" id="button2" value="重設">&nbsp;
+                <a href="/index/">返回總表</a>
+            </th>
+        </tr>
+    </table>
+</form>
+{% else %}
+<h2>{{h2_value}}</h2>
+<form action="." method="POST" name="form1">
+    {% csrf_token %}
+    <div>
+        {{index}}<input type="text" name="edit_id">
+    </div>
+    <div>
+        <input type="submit" name="button" id="button" value='{{button_value}}'>&nbsp;&nbsp;
+        <a href="/index/">返回總表</a>
+    </div>
+</form>
+{% endif %}
+<span style="color : Red">{{message}}</span>
+{% endblock %}

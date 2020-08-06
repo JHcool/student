@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>PostForm自動產生表格</title>
+{% endblock %}
+{% block content %}
+<h2>自動產生的表格</h2>
+<form action="." method='POST' name=form1>
+    {% csrf_token %}
+    <table border="1" cellspacing='1' cellpadding='4'>
+        {{postform}}
+    </table>
+</form>
+{% endblock %}
